@@ -36,7 +36,6 @@ const ChristmasTreeApp = () => {
   const [selectedImage, setSelectedImage] = useState<SelectedMemory | null>(null);
   
   // Audio state (YouTube)
-  const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const playerRef = useRef<any>(null);
 
@@ -76,10 +75,8 @@ const ChristmasTreeApp = () => {
           'onStateChange': (event: any) => {
              // 1 = Playing, 2 = Paused
              if (event.data === 1) {
-               setIsPlaying(true);
                setHasStarted(true);
              }
-             if (event.data === 2) setIsPlaying(false);
           }
         }
       });
@@ -450,7 +447,6 @@ const ChristmasTreeApp = () => {
         drawList.push({
             z: wz,
             draw: () => {
-                const alpha = scale * (isTip ? 1 : 0.6);
                 const size = p.size * scale * (isTip ? 2.5 : 1);
 
                 // Tip sparkle
@@ -581,7 +577,6 @@ const ChristmasTreeApp = () => {
         const topX2d = cx;
         const topY2d = cy - topY * scale + 50;
         
-        const glowSize = 10 + Math.sin(frame * 0.1) * 2;
         const grd = ctx.createRadialGradient(topX2d, topY2d, 1, topX2d, topY2d, 30);
         grd.addColorStop(0, 'white');
         grd.addColorStop(0.4, 'rgba(255, 215, 0, 0.9)');
